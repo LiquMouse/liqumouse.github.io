@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Simple Git Guide | LiquMouse</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="本文参考了  www.runoob.com&#x2F;manual&#x2F;git-guide www.cnblogs.com&#x2F;ttmaoxianjun&#x2F;articles&#x2F;14617125.html  ⚠️注意：git ≠ Github！！ 安装 git Windows 版下载 git OSx 版下载  绑定git与github账号绑定git与github账号 在本地创建一个新仓库1git init  克隆已有仓库">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Simple Git Guide">
+<meta property="og:url" content="http://example.com/2026/07/06/Simple-Git-Guide/index.html">
+<meta property="og:site_name" content="LiquMouse">
+<meta property="og:description" content="本文参考了  www.runoob.com&#x2F;manual&#x2F;git-guide www.cnblogs.com&#x2F;ttmaoxianjun&#x2F;articles&#x2F;14617125.html  ⚠️注意：git ≠ Github！！ 安装 git Windows 版下载 git OSx 版下载  绑定git与github账号绑定git与github账号 在本地创建一个新仓库1git init  克隆已有仓库">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.runoob.com/manual/git-guide/img/trees.png">
+<meta property="og:image" content="https://www.runoob.com/manual/git-guide/img/branches.png">
+<meta property="article:published_time" content="2026-07-06T01:21:41.000Z">
+<meta property="article:modified_time" content="2026-07-06T01:57:30.404Z">
+<meta property="article:author" content="LiquMouse">
+<meta property="article:tag" content="Python, C++, VSCode, WSL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.runoob.com/manual/git-guide/img/trees.png">
+  
+    <link rel="alternate" href="/atom.xml" title="LiquMouse" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">LiquMouse</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Simple-Git-Guide" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/07/06/Simple-Git-Guide/" class="article-date">
+  <time class="dt-published" datetime="2026-07-06T01:21:41.000Z" itemprop="datePublished">2026-07-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Simple Git Guide
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>本文参考了</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.runoob.com/manual/git-guide/">www.runoob.com/manual/git-guide</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/ttmaoxianjun/articles/14617125.html">www.cnblogs.com/ttmaoxianjun/articles/14617125.html</a></li>
+</ul>
+<p>⚠️注意：<strong>git ≠ Github</strong>！！</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/git-for-windows/git/releases/latest">git Windows 版下载</a></li>
+<li><a target="_blank" rel="noopener" href="http://git-scm.com/download/mac">git OSx 版下载</a></li>
+</ul>
+<h2 id="绑定git与github账号"><a href="#绑定git与github账号" class="headerlink" title="绑定git与github账号"></a>绑定git与github账号</h2><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/ttmaoxianjun/articles/14617125.html">绑定git与github账号</a></p>
+<h2 id="在本地创建一个新仓库"><a href="#在本地创建一个新仓库" class="headerlink" title="在本地创建一个新仓库"></a>在本地创建一个新仓库</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
+
+<h2 id="克隆已有仓库"><a href="#克隆已有仓库" class="headerlink" title="克隆已有仓库"></a>克隆已有仓库</h2><p>从Github克隆仓库到本地</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone git@github.com:path/to/repository.git</span><br></pre></td></tr></table></figure>
+
+<h2 id="工作流"><a href="#工作流" class="headerlink" title="工作流"></a>工作流</h2><p>你的本地仓库由 git 维护的三棵“树”组成。第一个是你的 <code>工作目录</code>，它持有实际文件；第二个是 <code>暂存区（Index）</code>，它像个缓存区域，临时保存你的改动；最后是 <code>HEAD</code>，它指向你最后一次提交的结果。</p>
+<p><img src="https://www.runoob.com/manual/git-guide/img/trees.png"></p>
+<h2 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h2><p>分支是用来将特性开发绝缘开来的。在你创建仓库的时候，<code>master</code> 是“默认的”分支。在其他分支上进行开发，完成后再将它们合并到主分支上。</p>
+<p>如果你正在与他人合作一个项目，<strong>一定要先创建一个不同于master的分支！</strong></p>
+<p><img src="https://www.runoob.com/manual/git-guide/img/branches.png"></p>
+<p>创建一个叫做“feature_x”的分支，并切换过去：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b feature_x</span><br></pre></td></tr></table></figure>
+<h2 id="添加和提交"><a href="#添加和提交" class="headerlink" title="添加和提交"></a>添加和提交</h2><p>你可以提出更改（把它们添加到暂存区），使用如下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add &lt;filename&gt; #添加指定文件到暂存区</span><br><span class="line">git add * #添加所有改变的文件到暂存区</span><br></pre></td></tr></table></figure>
+
+<p>这是 git 基本工作流程的第一步；使用如下命令以实际提交改动：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m &quot;代码提交信息&quot;</span><br></pre></td></tr></table></figure>
+
+<p>现在，你的改动已经提交到了 HEAD，但是还没到远端仓库。 </p>
+<h2 id="更新与合并"><a href="#更新与合并" class="headerlink" title="更新与合并"></a>更新与合并</h2><p>要更新你的本地仓库至最新改动，执行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull</span><br></pre></td></tr></table></figure>
+<p>以在你的工作目录中 <em>获取（fetch）</em> 并 <em>合并（merge）</em> 远端的改动。</p>
+<p>要合并其他分支到你的当前分支（例如 master），执行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge &lt;branch&gt;</span><br></pre></td></tr></table></figure>
+
+<p>在这两种情况下，git 都会尝试去自动合并改动。遗憾的是，这可能并非每次都成功，并可能出现 <em>冲突（conflicts）</em>。这时候就需要你修改这些文件来手动合并这些<em>冲突（conflicts）</em>。</p>
+<h2 id="推送改动到远程仓库"><a href="#推送改动到远程仓库" class="headerlink" title="推送改动到远程仓库"></a>推送改动到远程仓库</h2><p>你的改动现在已经在本地仓库的 HEAD 中了。在推送到远端之前，为了避免在远端冲突，一定要先执行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull</span><br></pre></td></tr></table></figure>
+
+<p>之后，执行如下命令以将这些改动提交到远端仓库：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin feature_x</span><br></pre></td></tr></table></figure>
+<p>可以把 feature_x 换成你想要推送的任何分支。</p>
+<h2 id="替换本地改动"><a href="#替换本地改动" class="headerlink" title="替换本地改动"></a>替换本地改动</h2><p>假如你操作失误（当然，这最好永远不要发生），你可以使用如下命令替换掉本地改动：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -- &lt;filename&gt;</span><br></pre></td></tr></table></figure>
+
+<p>此命令会使用 HEAD 中的最新内容替换掉你的工作目录中的文件。已添加到暂存区的改动以及新文件都不会受到影响。</p>
+<p>假如你想丢弃你在本地的所有改动与提交，可以到服务器上获取最新的版本历史，并将你本地主分支指向它：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git fetch origin</span><br><span class="line">git reset --hard origin/master </span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/07/06/Simple-Git-Guide/" data-id="cuidIF9kIzyBuL_K9w6thsvji" data-title="Simple Git Guide" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2026/07/05/wsl-1006/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">VScode连接到WSL2报错1006</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/07/">七月 2026</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2026/07/06/Simple-Git-Guide/">Simple Git Guide</a>
+          </li>
+        
+          <li>
+            <a href="/2026/07/05/wsl-1006/">VScode连接到WSL2报错1006</a>
+          </li>
+        
+          <li>
+            <a href="/2026/07/05/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2026 LiquMouse<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
