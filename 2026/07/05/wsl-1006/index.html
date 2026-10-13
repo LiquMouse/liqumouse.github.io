@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="keywords" content="VScode连接到WSL2报错1006, Python, C++, VSCode, WSL">
     <meta name="description" content="问题的发生使用VScode连接到WSL2时持续出现 Error: WebSocket close with status code 1006，反复重试均失败。
-排查过程首先检查 WSL2 本身12wsl --version    # 2.7">
+排查过程首先检查 WSL2 本身wsl --version    # 2.7.1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -392,54 +392,73 @@
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
 
         
 
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h2 id="问题的发生"><a href="#问题的发生" class="headerlink" title="问题的发生"></a>问题的发生</h2><p>使用VScode连接到WSL2时持续出现 <code>Error: WebSocket close with status code 1006</code>，反复重试均失败。</p>
-<h2 id="排查过程"><a href="#排查过程" class="headerlink" title="排查过程"></a>排查过程</h2><h3 id="首先检查-WSL2-本身"><a href="#首先检查-WSL2-本身" class="headerlink" title="首先检查 WSL2 本身"></a>首先检查 WSL2 本身</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wsl <span class="literal">--version</span>    <span class="comment"># 2.7.10.0</span></span><br><span class="line">wsl <span class="literal">--status</span>     <span class="comment"># Ubuntu Running, WSL2</span></span><br></pre></td></tr></table></figure>
+<h2 id="排查过程"><a href="#排查过程" class="headerlink" title="排查过程"></a>排查过程</h2><h3 id="首先检查-WSL2-本身"><a href="#首先检查-WSL2-本身" class="headerlink" title="首先检查 WSL2 本身"></a>首先检查 WSL2 本身</h3><pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">wsl <span class="token operator">--</span>version    <span class="token comment"># 2.7.10.0</span>
+wsl <span class="token operator">--</span>status     <span class="token comment"># Ubuntu Running, WSL2</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>WSL2 运行正常，不是 WSL 本身的问题。</p>
 <h3 id="检查-VScode-Server"><a href="#检查-VScode-Server" class="headerlink" title="检查 VScode Server"></a>检查 VScode Server</h3><p>在 WSL2 内查看日志:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> ~/.vscode-server/data/logs/*/remoteagent.log</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">cat</span> ~/.vscode-server/data/logs/*/remoteagent.log<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>Server 启动正常，日志显示 “Extension host agent started”，没有崩溃。说明问题不在 Server 端，而在连接通道上。</p>
 <h3 id="检查-wslconfig"><a href="#检查-wslconfig" class="headerlink" title="检查 .wslconfig"></a>检查 .wslconfig</h3><p>查看 <code>C:\Users\&lt;user&gt;\.wslconfig</code>：</p>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[wsl2]</span></span><br><span class="line"><span class="attr">localhostForwarding</span>=<span class="literal">true</span></span><br><span class="line"><span class="attr">networkingMode</span>=Mirrored</span><br><span class="line"><span class="attr">firewall</span>=<span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-ini" data-language="ini"><code class="language-ini"><span class="token section"><span class="token punctuation">[</span><span class="token section-name selector">wsl2</span><span class="token punctuation">]</span></span>
+<span class="token key attr-name">localhostForwarding</span><span class="token punctuation">=</span><span class="token value attr-value">true</span>
+<span class="token key attr-name">networkingMode</span><span class="token punctuation">=</span><span class="token value attr-value">Mirrored</span>
+<span class="token key attr-name">firewall</span><span class="token punctuation">=</span><span class="token value attr-value">false</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><code>networkingMode=Mirrored</code> 是常见嫌疑——GitHub 多个 issue（<a target="_blank" rel="noopener" href="https://github.com/microsoft/vscode/issues/261631">#261631</a>）报告 Mirrored&#x2F;VirtioProxy 模式导致 1006。修改为默认 NAT 模式并重启 WSL：</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl <span class="literal">--shutdown</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">wsl <span class="token operator">--</span>shutdown<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p><strong>无效。</strong></p>
 <h3 id="开启-debug-日志"><a href="#开启-debug-日志" class="headerlink" title="开启 debug 日志"></a>开启 debug 日志</h3><p>在 VScode <code>settings.json</code> 中：</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;remote.WSL.debug&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token property">"remote.WSL.debug"</span><span class="token operator">:</span> <span class="token boolean">true</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>然后通过 <code>Ctrl+Shift+P</code> → <code>WSL: Show Log</code> 查看 WSL Daemon 日志。</p>
 <p>或者直接找到日志文件：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\&lt;user&gt;\AppData\Roaming\Code\logs\&lt;session&gt;\window1\exthost\ms-vscode-remote.remote-wsl\wsl-daemon-*.log</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">C:\Users\&lt;user&gt;\AppData\Roaming\Code\logs\&lt;session&gt;\window1\exthost\ms-vscode-remote.remote-wsl\wsl-daemon-*.log<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>关键日志：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[07:32:17.629] WSL feature installed: false (dll path)</span><br><span class="line">[07:32:18.102] Windows build: 9200.</span><br><span class="line">[07:32:18.102] Starting VS Code Server inside WSL (wsl1)</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">[07:32:17.629] WSL feature installed: false (dll path)
+[07:32:18.102] Windows build: 9200.
+[07:32:18.102] Starting VS Code Server inside WSL (wsl1)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>Windows 版本号被识别为 <strong>9200</strong>（实际是 Windows 11 build 26200），导致 WSL 扩展误用 WSL1 兼容模式。</p>
 <p>紧接着：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Exec (0) stderr: /home/liqumouse/.vscode-server/bin/.../node: cannot execute binary file</span><br><span class="line">Exec (0) has terminated with status 126</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">Exec (0) stderr: &#x2F;home&#x2F;liqumouse&#x2F;.vscode-server&#x2F;bin&#x2F;...&#x2F;node: cannot execute binary file
+Exec (0) has terminated with status 126<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>Proxy 进程连续 10 次尝试启动均失败，每次返回 <code>cannot execute binary file</code>。</p>
 <h3 id="为什么是-9200？"><a href="#为什么是-9200？" class="headerlink" title="为什么是 9200？"></a>为什么是 9200？</h3><p>在 WSL Daemon 日志的环境变量中发现了：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;__COMPAT_LAYER&quot;: &quot;Win8RTM&quot;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">&quot;__COMPAT_LAYER&quot;: &quot;Win8RTM&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>这导致 Windows 对 VScode 进程谎报系统版本为 Windows 8（9200）。</p>
 <h2 id="根因"><a href="#根因" class="headerlink" title="根因"></a>根因</h2><p>VScode 的可执行文件被设置了 <strong>Windows 8 兼容模式</strong>。注册表中：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">HKCU\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers</span><br><span class="line">  C:\Users\...\Code.exe = ~ WIN8RTM</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">HKCU\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers
+  C:\Users\...\Code.exe &#x3D; ~ WIN8RTM<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>完整的因果链：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Code.exe 设置了 WIN8RTM 兼容模式</span><br><span class="line">  → __COMPAT_LAYER=Win8RTM</span><br><span class="line">    → Windows 报告版本号为 9200</span><br><span class="line">      → WSL 扩展误判 WSL2 不可用</span><br><span class="line">        → 使用 bash.exe（WSL1 兼容层）代替 wsl.exe</span><br><span class="line">          → bash.exe 将 ELF node 二进制当 shell 脚本执行</span><br><span class="line">            → cannot execute binary file (status 126)</span><br><span class="line">              → TCP proxy 链路断裂</span><br><span class="line">                → WebSocket 1006</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">Code.exe 设置了 WIN8RTM 兼容模式
+  → __COMPAT_LAYER&#x3D;Win8RTM
+    → Windows 报告版本号为 9200
+      → WSL 扩展误判 WSL2 不可用
+        → 使用 bash.exe（WSL1 兼容层）代替 wsl.exe
+          → bash.exe 将 ELF node 二进制当 shell 脚本执行
+            → cannot execute binary file (status 126)
+              → TCP proxy 链路断裂
+                → WebSocket 1006<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>这个问题与 <code>.wslconfig</code> 中的 <code>networkingMode</code>、Steam++ 代理、WSL2 内核版本等<strong>均无关</strong>——它们看起来可疑，但不是根因。</p>
 <h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>删除 VScode 的兼容模式标志：</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Remove-ItemProperty</span> <span class="string">&quot;HKCU:\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers&quot;</span> <span class="literal">-Name</span> <span class="string">&quot;C:\Users\&lt;user&gt;\AppData\Local\Programs\Microsoft VS Code\Code.exe&quot;</span> <span class="literal">-Force</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">Remove-ItemProperty</span> <span class="token string">"HKCU:\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers"</span> <span class="token operator">-</span>Name <span class="token string">"C:\Users\&lt;user>\AppData\Local\Programs\Microsoft VS Code\Code.exe"</span> <span class="token operator">-</span>Force<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>完全退出 VScode，重新打开，连接 WSL2 即可恢复正常。</p>
 <h2 id="教训"><a href="#教训" class="headerlink" title="教训"></a>教训</h2><ul>
@@ -667,6 +686,9 @@
 <!-- 代码块功能依赖 -->
 <script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
 
 
 <!-- 代码语言 -->

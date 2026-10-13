@@ -398,6 +398,9 @@ git W">
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
 
         
 
@@ -414,10 +417,10 @@ git W">
 <li><a target="_blank" rel="noopener" href="http://git-scm.com/download/mac">git OSx 版下载</a></li>
 </ul>
 <h2 id="绑定git与github账号"><a href="#绑定git与github账号" class="headerlink" title="绑定git与github账号"></a>绑定git与github账号</h2><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/ttmaoxianjun/articles/14617125.html">绑定git与github账号</a></p>
-<h2 id="在本地创建一个新仓库"><a href="#在本地创建一个新仓库" class="headerlink" title="在本地创建一个新仓库"></a>在本地创建一个新仓库</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
+<h2 id="在本地创建一个新仓库"><a href="#在本地创建一个新仓库" class="headerlink" title="在本地创建一个新仓库"></a>在本地创建一个新仓库</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> init<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h2 id="克隆已有仓库"><a href="#克隆已有仓库" class="headerlink" title="克隆已有仓库"></a>克隆已有仓库</h2><p>从Github克隆仓库到本地</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> git@github.com:path/to/repository.git</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> clone git@github.com:path/to/repository.git<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h2 id="工作流"><a href="#工作流" class="headerlink" title="工作流"></a>工作流</h2><p>你的本地仓库由 git 维护的三棵“树”组成。第一个是你的 <code>工作目录</code>，它持有实际文件；第二个是 <code>暂存区（Index）</code>，它像个缓存区域，临时保存你的改动；最后是 <code>HEAD</code>，它指向你最后一次提交的结果。</p>
 <p><img src="https://www.runoob.com/manual/git-guide/img/trees.png"></p>
@@ -425,33 +428,35 @@ git W">
 <p>如果你正在与他人合作一个项目，<strong>一定要先创建一个不同于master的分支！</strong></p>
 <p><img src="https://www.runoob.com/manual/git-guide/img/branches.png"></p>
 <p>创建一个叫做“feature_x”的分支，并切换过去：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b feature_x</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> checkout <span class="token parameter variable">-b</span> feature_x<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h2 id="添加和提交"><a href="#添加和提交" class="headerlink" title="添加和提交"></a>添加和提交</h2><p>你可以提出更改（把它们添加到暂存区），使用如下命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add &lt;filename&gt; <span class="comment">#添加指定文件到暂存区</span></span><br><span class="line">git add * <span class="comment">#添加所有改变的文件到暂存区</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> <span class="token function">add</span> <span class="token operator">&lt;</span>filename<span class="token operator">></span> <span class="token comment">#添加指定文件到暂存区</span>
+<span class="token function">git</span> <span class="token function">add</span> * <span class="token comment">#添加所有改变的文件到暂存区</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>这是 git 基本工作流程的第一步；使用如下命令以实际提交改动：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m <span class="string">&quot;代码提交信息&quot;</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> commit <span class="token parameter variable">-m</span> <span class="token string">"代码提交信息"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>现在，你的改动已经提交到了 HEAD，但是还没到远端仓库。 </p>
 <h2 id="更新与合并"><a href="#更新与合并" class="headerlink" title="更新与合并"></a>更新与合并</h2><p>要更新你的本地仓库至最新改动，执行：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> pull<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>以在你的工作目录中 <em>获取（fetch）</em> 并 <em>合并（merge）</em> 远端的改动。</p>
 <p>要合并其他分支到你的当前分支（例如 master），执行：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge &lt;branch&gt;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> merge <span class="token operator">&lt;</span>branch<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>在这两种情况下，git 都会尝试去自动合并改动。遗憾的是，这可能并非每次都成功，并可能出现 <em>冲突（conflicts）</em>。这时候就需要你修改这些文件来手动合并这些<em>冲突（conflicts）</em>。</p>
 <h2 id="推送改动到远程仓库"><a href="#推送改动到远程仓库" class="headerlink" title="推送改动到远程仓库"></a>推送改动到远程仓库</h2><p>你的改动现在已经在本地仓库的 HEAD 中了。在推送到远端之前，为了避免在远端冲突，一定要先执行</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> pull<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>之后，执行如下命令以将这些改动提交到远端仓库：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin feature_x</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> push origin feature_x<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>可以把 feature_x 换成你想要推送的任何分支。</p>
 <h2 id="替换本地改动"><a href="#替换本地改动" class="headerlink" title="替换本地改动"></a>替换本地改动</h2><p>假如你操作失误（当然，这最好永远不要发生），你可以使用如下命令替换掉本地改动：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -- &lt;filename&gt;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> checkout -- <span class="token operator">&lt;</span>filename<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>此命令会使用 HEAD 中的最新内容替换掉你的工作目录中的文件。已添加到暂存区的改动以及新文件都不会受到影响。</p>
 <p>假如你想丢弃你在本地的所有改动与提交，可以到服务器上获取最新的版本历史，并将你本地主分支指向它：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git fetch origin</span><br><span class="line">git reset --hard origin/master </span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> fetch origin
+<span class="token function">git</span> reset <span class="token parameter variable">--hard</span> origin/master <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
                 
             </div>
             <hr/>
@@ -673,6 +678,9 @@ git W">
 <!-- 代码块功能依赖 -->
 <script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
 
 
 <!-- 代码语言 -->
