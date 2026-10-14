@@ -551,7 +551,8 @@ mjx-container[display="true"] + br {
 </li>
 </ol>
 <h3 id="编程和提交更改"><a href="#编程和提交更改" class="headerlink" title="编程和提交更改"></a>编程和提交更改</h3><h4 id="1-同步主干代码"><a href="#1-同步主干代码" class="headerlink" title="1. 同步主干代码"></a>1. 同步主干代码</h4><p>每次<strong>开始修改代码前</strong>, 应当先从远程仓库的 <code>master</code> 分支拉取最新代码, 以避免冲突:</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> pull<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> checkout master
+<span class="token function">git</span> pull<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h4 id="2-创建功能分支"><a href="#2-创建功能分支" class="headerlink" title="2. 创建功能分支"></a>2. 创建功能分支</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> checkout <span class="token parameter variable">-b</span> feature/xxx<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
