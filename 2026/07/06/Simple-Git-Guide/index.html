@@ -478,9 +478,13 @@ mjx-container[display="true"] + br {
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/git/">
+                                <span class="chip bg-color">git</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -539,6 +543,7 @@ mjx-container[display="true"] + br {
 <p><img src="https://www.runoob.com/manual/git-guide/img/branches.png"></p>
 <p>创建一个叫做“feature_x”的分支，并切换过去：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> checkout <span class="token parameter variable">-b</span> feature_x<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <h2 id="添加和提交"><a href="#添加和提交" class="headerlink" title="添加和提交"></a>添加和提交</h2><p>你可以提出更改（把它们添加到暂存区），使用如下命令：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> <span class="token function">add</span> <span class="token operator">&lt;</span>filename<span class="token operator">></span> <span class="token comment">#添加指定文件到暂存区</span>
 <span class="token function">git</span> <span class="token function">add</span> * <span class="token comment">#添加所有改变的文件到暂存区</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
@@ -546,9 +551,10 @@ mjx-container[display="true"] + br {
 <p>这是 git 基本工作流程的第一步；使用如下命令以实际提交改动：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> commit <span class="token parameter variable">-m</span> <span class="token string">"代码提交信息"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p>现在，你的改动已经提交到了 HEAD，但是还没到远端仓库。 </p>
+<p>现在，你的改动已经提交到了 HEAD，但是还没到远端仓库。</p>
 <h2 id="更新与合并"><a href="#更新与合并" class="headerlink" title="更新与合并"></a>更新与合并</h2><p>要更新你的本地仓库至最新改动，执行：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> pull<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <p>以在你的工作目录中 <em>获取（fetch）</em> 并 <em>合并（merge）</em> 远端的改动。</p>
 <p>要合并其他分支到你的当前分支（例如 master），执行：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> merge <span class="token operator">&lt;</span>branch<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -559,6 +565,7 @@ mjx-container[display="true"] + br {
 
 <p>之后，执行如下命令以将这些改动提交到远端仓库：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> push origin feature_x<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <p>可以把 feature_x 换成你想要推送的任何分支。</p>
 <h2 id="替换本地改动"><a href="#替换本地改动" class="headerlink" title="替换本地改动"></a>替换本地改动</h2><p>假如你操作失误（当然，这最好永远不要发生），你可以使用如下命令替换掉本地改动：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> checkout -- <span class="token operator">&lt;</span>filename<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -567,6 +574,7 @@ mjx-container[display="true"] + br {
 <p>假如你想丢弃你在本地的所有改动与提交，可以到服务器上获取最新的版本历史，并将你本地主分支指向它：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> fetch origin
 <span class="token function">git</span> reset <span class="token parameter variable">--hard</span> origin/master <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
                 
             </div>
             <hr/>
@@ -629,7 +637,11 @@ mjx-container[display="true"] + br {
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/git/">
+                                    <span class="chip bg-color">git</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -746,14 +758,6 @@ mjx-container[display="true"] + br {
                             
                         </span>
                     </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/WSL-VScode/">
-                        <span class="chip bg-color">WSL VScode</span>
-                    </a>
-                    
                 </div>
                 
             </div>
