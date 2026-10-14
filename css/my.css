@@ -92,3 +92,7 @@ html {
         0 4px 23px 0 rgba(0, 0, 0, 0.12),
         0 8px 10px -5px rgba(107, 122, 143, 0.2);
 }
+
+html {
+    scroll-behavior: smooth;
+}
