@@ -1,1 +1,94 @@
 /* Here is your custom css styles. */
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* ==========================================================================
+   以下是对 matery.css 默认值的覆盖。
+   my.css 在 matery.css 之后加载，同优先级下后者胜出，所以这些声明生效。
+   原先这些值是直接改在 matery.css 里的，现集中到此处，让 matery.css
+   保持上游原样，便于日后与上游版本比对。
+   ========================================================================== */
+
+/* 1. 顶栏/页脚主色
+      默认: linear-gradient(to right, #4cbf30 0%, #0f9d58 100%)  (绿色) */
+.bg-color {
+    background-image: linear-gradient(to right, #1f2328 0%, #24292e 100%);
+}
+
+/* 2. 代码块的展开/收起按钮层级
+      默认: z-index: 999 !important —— 会穿透到根层叠上下文，浮到顶栏之上
+      （顶栏 .navbar-fixed 的 z-index 是 997）。降到 989 使其居于顶栏之下。 */
+.code-expand {
+    z-index: 989 !important;
+}
+
+/* 3. 轮播图颜色蒙版
+      默认: 紫→洋红→红→橙→琥珀→玫红 的 60s 循环。
+      改为莫兰迪低饱和灰调。
+      同名的 @keyframes 后定义者整条生效，因此在 my.css 里重定义即可覆盖。 */
+@-webkit-keyframes rainbow {
+
+    0%,
+    100% {
+        background: linear-gradient(45deg, rgba(107, 122, 143, 0.75) 0%, rgba(107, 122, 143, 0.65) 100%);
+    }
+
+    16% {
+        background: linear-gradient(45deg, rgba(127, 139, 150, 0.75) 0%, rgba(127, 139, 150, 0.65) 100%);
+    }
+
+    32% {
+        background: linear-gradient(45deg, rgba(138, 143, 136, 0.75) 0%, rgba(138, 143, 136, 0.65) 100%);
+    }
+
+    48% {
+        background: linear-gradient(45deg, rgba(154, 145, 136, 0.75) 0%, rgba(154, 145, 136, 0.65) 100%);
+    }
+
+    64% {
+        background: linear-gradient(45deg, rgba(140, 130, 121, 0.75) 0%, rgba(140, 130, 121, 0.65) 100%);
+    }
+
+    80% {
+        background: linear-gradient(45deg, rgba(122, 127, 140, 0.75) 0%, rgba(122, 127, 140, 0.65) 100%);
+    }
+}
+
+@keyframes rainbow {
+
+    0%,
+    100% {
+        background: linear-gradient(45deg, rgba(107, 122, 143, 0.75) 0%, rgba(107, 122, 143, 0.65) 100%);
+    }
+
+    16% {
+        background: linear-gradient(45deg, rgba(127, 139, 150, 0.75) 0%, rgba(127, 139, 150, 0.65) 100%);
+    }
+
+    32% {
+        background: linear-gradient(45deg, rgba(138, 143, 136, 0.75) 0%, rgba(138, 143, 136, 0.65) 100%);
+    }
+
+    48% {
+        background: linear-gradient(45deg, rgba(154, 145, 136, 0.75) 0%, rgba(154, 145, 136, 0.65) 100%);
+    }
+
+    64% {
+        background: linear-gradient(45deg, rgba(140, 130, 121, 0.75) 0%, rgba(140, 130, 121, 0.65) 100%);
+    }
+
+    80% {
+        background: linear-gradient(45deg, rgba(122, 127, 140, 0.75) 0%, rgba(122, 127, 140, 0.65) 100%);
+    }
+}
+
+/* 4. 鼠标悬浮按钮颜色 */
+.cover-btns a:hover {
+    border: 1px solid #8a8f88;
+    background-color: #8a8f88;
+    box-shadow: 0 14px 26px -12px rgba(107, 122, 143, 0.42),
+        0 4px 23px 0 rgba(0, 0, 0, 0.12),
+        0 8px 10px -5px rgba(107, 122, 143, 0.2);
+}
