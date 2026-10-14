@@ -543,11 +543,9 @@ mjx-container[display="true"] + br {
 <p>意思是获取 <code>origin</code> 的元信息（比如该远程分支有哪些仓库），这一步不会触及代码</p>
 </li>
 <li><p>执行</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> branch --set-upstream-to<span class="token operator">=</span>origin/master master
-<span class="token function">git</span> pull<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> pull origin master<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p>第1行的意思是将本地的 <code>master</code> 分支与远程仓库的 <code>master</code> 分支关联起来, 以后执行 <code>git pull</code> 时就会默认拉取远程仓库的 <code>master</code> 分支代码.</p>
-<p>第2行的作用是从 <code>origin</code> 拉取 <code>master</code> 分支的代码。</p>
+<p>第1行的意思是从 <code>origin</code> 仓库的 <code>master</code> 分支拉取代码</p>
 </li>
 <li><p>如果正常，应当能看到原本的空文件夹有了各种文件</p>
 </li>
