@@ -552,9 +552,12 @@ mjx-container[display="true"] + br {
 </ol>
 <h3 id="编程和提交更改"><a href="#编程和提交更改" class="headerlink" title="编程和提交更改"></a>编程和提交更改</h3><p>开发流程应当是“一轮一轮”的。每轮流程为：同步主干（master分支）代码→签出新分支→推送分支→回到主干分支，同步代码→创建新分支…… 示意图如下：</p>
 <p><img src="/../image/%E7%94%A8git%E5%8D%8F%E4%BD%9C/2a93be92efe347f4f81031ac515bc87b.jpeg" alt="img"></p>
-<h4 id="1-同步主干代码"><a href="#1-同步主干代码" class="headerlink" title="1. 同步主干代码"></a>1. 同步主干代码</h4><p>每次<strong>开始修改代码前</strong>, 应当先从远程仓库的 <code>master</code> 分支拉取最新代码, 以避免冲突:</p>
+<h4 id="1-同步主干代码"><a href="#1-同步主干代码" class="headerlink" title="1. 同步主干代码"></a>1. 同步主干代码</h4><p>每次<strong>开始修改代码前</strong>, 如果<strong>上一轮的PR被通过</strong>, 或者是全新开始, 则回到主分支, 从远程仓库的 <code>master</code> 分支拉取最新代码, 以避免冲突:</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> checkout master
 <span class="token function">git</span> pull<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>如果<strong>上一轮PR还没有通过</strong>, 则可在原先创建的新分支上继续开发, 但要先<strong>把本地分支与master</strong>同步. 然后直接进入 3. 开发和提交更改</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> merge origin/master<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h4 id="2-创建功能分支"><a href="#2-创建功能分支" class="headerlink" title="2. 创建功能分支"></a>2. 创建功能分支</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> checkout <span class="token parameter variable">-b</span> feature/xxx<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
