@@ -543,15 +543,17 @@ mjx-container[display="true"] + br {
 <p>意思是获取 <code>origin</code> 的元信息（比如该远程分支有哪些仓库），这一步不会触及代码</p>
 </li>
 <li><p>执行</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> pull origin master<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> pull origin master
+<span class="token function">git</span> branch --set-upstream-to<span class="token operator">=</span>origin/master master
+<span class="token function">git</span> pull<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
-<p>第1行的意思是从 <code>origin</code> 仓库的 <code>master</code> 分支拉取代码</p>
+<p>第1行的意思是从 <code>origin</code> 仓库的 <code>master</code> 分支拉取代码, 第2行的意思是将本地的 <code>master</code> 分支与远程仓库的 <code>master</code> 分支关联起来, 第3行的意思是拉取代码, 此时不需要手动指定远程仓库和分支, 因为已经关联了</p>
 </li>
 <li><p>如果正常，应当能看到原本的空文件夹有了各种文件</p>
 </li>
 </ol>
 <h3 id="编程和提交更改"><a href="#编程和提交更改" class="headerlink" title="编程和提交更改"></a>编程和提交更改</h3><p>开发流程应当是“一轮一轮”的。每轮流程为：同步主干（master分支）代码→签出新分支→推送分支→回到主干分支，同步代码→创建新分支…… 示意图如下：</p>
-<p><img src="/../image/%E7%94%A8git%E5%8D%8F%E4%BD%9C/2a93be92efe347f4f81031ac515bc87b.jpeg" alt="img"></p>
+<p><img src="/../image/%E7%94%A8git%E5%8D%8F%E4%BD%9C/2a93be92efe347f4f81031ac515bc87b.jpeg"></p>
 <h4 id="1-同步主干代码"><a href="#1-同步主干代码" class="headerlink" title="1. 同步主干代码"></a>1. 同步主干代码</h4><p>每次<strong>开始修改代码前</strong>, 如果<strong>上一轮的PR被通过</strong>, 或者是全新开始, 则回到主分支, 从远程仓库的 <code>master</code> 分支拉取最新代码, 以避免冲突:</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> checkout master
 <span class="token function">git</span> pull<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
