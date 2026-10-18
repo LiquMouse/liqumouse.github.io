@@ -482,9 +482,9 @@ mjx-container[display="true"] + br {
 <li>阅读 <a href="https://liqumouse.github.io/2026/07/06/Simple-Git-Guide">git的简单教程</a>, 了解一些基本概念, 把git装到你的电脑上.</li>
 <li>注册 <a target="_blank" rel="noopener" href="https://github.com/">Github</a> 或 <a target="_blank" rel="noopener" href="https://gitee.com/">Gitee</a> 账号. 这取决于将要用什么平台作为远程仓库.</li>
 </ol>
-<h2 id="命令行操作"><a href="#命令行操作" class="headerlink" title="命令行操作"></a>命令行操作</h2><h3 id="拉取远程仓库"><a href="#拉取远程仓库" class="headerlink" title="拉取远程仓库"></a>拉取远程仓库</h3><p><strong>⚠️注意: 如果你不熟悉, 在进行以下操作前, 一定要新建<span style="font-size:2em; font-weight:900; line-height:1; background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #00ffff, #0000ff, #8f00ff); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent;">空文件夹</span>进行,  否则拉取时可能丢失已有文件! <span style="font-size:2em; font-weight:900; line-height:1; background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #00ffff, #0000ff, #8f00ff); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent;">路径不要有中文!!!</span></strong> 后续再把已有代码迁移进来</p>
+<h2 id="命令行操作"><a href="#命令行操作" class="headerlink" title="命令行操作"></a>命令行操作</h2><h3 id="拉取远程仓库"><a href="#拉取远程仓库" class="headerlink" title="拉取远程仓库"></a>拉取远程仓库</h3><p><strong>⚠️注意: 如果你不熟悉, 建议在<span style="font-size:2em; font-weight:900; line-height:1; background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #00ffff, #0000ff, #8f00ff); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent;">空文件夹</span>中进行以下操作, 避免与已有文件发生冲突; 操作前请先备份重要文件. 路径含中文或空格通常也能正常工作, 但为了减少工具兼容性问题, 建议使用<span style="font-size:2em; font-weight:900; line-height:1; background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #00ffff, #0000ff, #8f00ff); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent;">纯英文路径</span>.</strong> 后续再把已有代码迁移进来</p>
 <ol>
-<li><p>将本机的SSH公钥添加到 Gitee 账号，见 <a target="_blank" rel="noopener" href="https://help.gitee.com/base/account/SSH%E5%85%AC%E9%92%A5%E8%AE%BE%E7%BD%AE/">SSH公钥设置</a> , 这样在操作时就能通过身份验证</p>
+<li><p>将本机的 SSH 公钥添加到 Gitee 账号（如果使用 GitHub，则添加到 GitHub），Gitee 的设置方法见 <a target="_blank" rel="noopener" href="https://help.gitee.com/base/account/SSH%E5%85%AC%E9%92%A5%E8%AE%BE%E7%BD%AE/">SSH公钥设置</a> , 这样在操作时就能通过身份验证</p>
 </li>
 <li><p>创建一个空文件夹，名字任意</p>
 </li>
@@ -496,32 +496,41 @@ mjx-container[display="true"] + br {
 <li><p>执行</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> remote <span class="token function">add</span> origin git@gitee.com/LiquMouse/z4<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p>意思是：将本地仓库绑定到 <code>远程仓库地址</code> 对应的仓库，并且把这个远程仓库在本地命名为<code>origin</code>（因为一个本地仓库可以绑定多个远程仓库），以后执行命令时，<code>origin</code>指的就是这个远程仓库</p>
+<p>意思是：将本地仓库绑定到 <code>远程仓库地址</code> 对应的仓库，并且把这个远程仓库在本地命名为<code>origin</code>（因为一个本地仓库可以绑定多个远程仓库），以后执行命令时，<code>origin</code>指的就是这个远程仓库。可以用 <code>git remote -v</code> 查看当前绑定情况</p>
 </li>
 <li><p>执行</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> fetch origin<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p>意思是获取 <code>origin</code> 的元信息（比如该远程分支有哪些仓库），这一步不会触及代码</p>
+<p>意思是从 <code>origin</code> 下载远程仓库的对象和分支引用，并更新本地的远程跟踪分支（例如 <code>origin/master</code>）；这一步不会修改你的工作目录和当前分支</p>
 </li>
 <li><p>执行</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> pull origin master
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> checkout master
 <span class="token function">git</span> branch --set-upstream-to<span class="token operator">=</span>origin/master master
 <span class="token function">git</span> pull<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
-<p>第1行的意思是从 <code>origin</code> 仓库的 <code>master</code> 分支拉取代码, 第2行的意思是将本地的 <code>master</code> 分支与远程仓库的 <code>master</code> 分支关联起来, 第3行的意思是拉取代码, 此时不需要手动指定远程仓库和分支, 因为已经关联了</p>
+<p>第 1 行会切换到本地的 <code>master</code> 分支；如果本地还没有这个分支，会基于已经 fetch 下来的 <code>origin/master</code> 创建并跟踪它。第 2 行确保本地 <code>master</code> 与远程的 <code>origin/master</code> 建立跟踪关系。第 3 行从已关联的远程分支拉取最新代码，此时不需要手动指定远程仓库和分支。</p>
+<blockquote>
+<p>如果远程仓库的默认分支叫 <code>main</code>，请把上面命令中的 <code>master</code> 都换成 <code>main</code>（即 <code>git checkout main</code>、<code>git branch --set-upstream-to=origin/main main</code>）。</p>
+</blockquote>
 </li>
 <li><p>如果正常，应当能看到原本的空文件夹有了各种文件</p>
 </li>
 </ol>
-<h3 id="编程和提交更改"><a href="#编程和提交更改" class="headerlink" title="编程和提交更改"></a>编程和提交更改</h3><p>开发流程应当是“一轮一轮”的。每轮流程为：同步主干（master分支）代码→签出新分支→推送分支→回到主干分支，同步代码→创建新分支…… 示意图如下：</p>
+<h3 id="编程和提交更改"><a href="#编程和提交更改" class="headerlink" title="编程和提交更改"></a>编程和提交更改</h3><p>开发流程应当是“一轮一轮”的。每轮流程为：同步主干（<code>master</code> 或 <code>main</code> 分支）代码→签出新分支→推送分支→发起合并请求（PR）→合并后再同步主干、开始下一轮。示意图如下：</p>
 <p><img src="/../image/%E7%94%A8git%E5%8D%8F%E4%BD%9C/2a93be92efe347f4f81031ac515bc87b.jpeg"></p>
-<h4 id="1-同步主干代码"><a href="#1-同步主干代码" class="headerlink" title="1. 同步主干代码"></a>1. 同步主干代码</h4><p>每次<strong>开始修改代码前</strong>, 如果<strong>上一轮的PR被通过</strong>, 或者是全新开始, 则回到主分支, 从远程仓库的 <code>master</code> 分支拉取最新代码, 以避免冲突:</p>
+<blockquote>
+<p>下面以主分支 <code>master</code> 为例；如果你的远程仓库默认分支叫 <code>main</code>，请把命令中的 <code>master</code> 换成 <code>main</code>。</p>
+</blockquote>
+<h4 id="1-同步主干代码"><a href="#1-同步主干代码" class="headerlink" title="1. 同步主干代码"></a>1. 同步主干代码</h4><p>每次<strong>开始修改代码前</strong>, 如果<strong>上一轮的 PR 已经被合并</strong>, 或者是全新开始, 则回到主分支, 从远程仓库拉取最新代码, 以避免冲突:</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> checkout master
 <span class="token function">git</span> pull<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<p>如果<strong>上一轮PR还没有通过</strong>, 则可在原先创建的新分支上继续开发, 但要先<strong>把本地分支与master</strong>同步. 然后直接进入 3. 开发和提交更改</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> merge origin/master<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>如果<strong>上一轮 PR 还没有通过</strong>, 可以继续在原来的功能分支上开发, 但开发前要先<strong>把远端主分支的最新代码同步到当前功能分支</strong>:</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> checkout feature/xxx
+<span class="token function">git</span> fetch origin
+<span class="token function">git</span> merge origin/master<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
+<p>其中 <code>git fetch origin</code> 会更新本地的 <code>origin/master</code>，<code>git merge origin/master</code> 会把远程主分支的最新提交合并到当前功能分支。如果出现冲突，需要先解决冲突并提交，再继续开发。</p>
 <h4 id="2-创建功能分支"><a href="#2-创建功能分支" class="headerlink" title="2. 创建功能分支"></a>2. 创建功能分支</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> checkout <span class="token parameter variable">-b</span> feature/xxx<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h4 id="3-开发和提交更改"><a href="#3-开发和提交更改" class="headerlink" title="3. 开发和提交更改"></a>3. 开发和提交更改</h4><p>按模块开发, 开发完成后提交代码. 提交信息建议:</p>
@@ -561,12 +570,20 @@ mjx-container[display="true"] + br {
 </tbody></table>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> <span class="token function">add</span> <span class="token builtin class-name">.</span>
 <span class="token function">git</span> commit <span class="token parameter variable">-m</span> <span class="token string">"feat: 增加用户登录功能"</span>
-<span class="token function">git</span> push origin feature/xxx<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<span class="token function">git</span> push <span class="token parameter variable">-u</span> origin feature/xxx<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
-<p><strong>不要直接向master分支提交代码, 先提交到功能分支, 然后发起合并请求</strong></p>
-<h4 id="4-同步主干并继续开发"><a href="#4-同步主干并继续开发" class="headerlink" title="4. 同步主干并继续开发"></a>4. 同步主干并继续开发</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> checkout master
+<p>第一次推送时使用 <code>-u</code>（等价于 <code>--set-upstream</code>）可以把本地功能分支和远程同名分支关联起来，以后直接执行 <code>git push</code> 即可。</p>
+<p><strong>不要直接向主分支提交代码, 先提交到功能分支, 然后发起合并请求</strong></p>
+<h4 id="4-同步主干并继续开发"><a href="#4-同步主干并继续开发" class="headerlink" title="4. 同步主干并继续开发"></a>4. 同步主干并继续开发</h4><p>如果还要在当前功能分支上继续开发，需要先把更新后的主分支合并进来：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> checkout master
 <span class="token function">git</span> pull
-<span class="token function">git</span> checkout feature/xxx<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<span class="token function">git</span> checkout feature/xxx
+<span class="token function">git</span> merge master<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>如果上一轮 PR 已经合并、准备开始下一轮开发，则回到最新的 <code>master</code> 后，从它创建一个新的功能分支即可：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> checkout master
+<span class="token function">git</span> pull
+<span class="token function">git</span> checkout <span class="token parameter variable">-b</span> feature/yyy<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="使用VSCode的可视化界面操作"><a href="#使用VSCode的可视化界面操作" class="headerlink" title="使用VSCode的可视化界面操作"></a>使用VSCode的可视化界面操作</h2><p><a target="_blank" rel="noopener" href="https://code.visualstudio.com/">VSCode</a> 提供了能够方便操作git的图形化界面.</p>
 <h3 id="用VSCode打开仓库"><a href="#用VSCode打开仓库" class="headerlink" title="用VSCode打开仓库"></a>用VSCode打开仓库</h3><p><strong>假设你已经完成了上述步骤</strong></p>
@@ -577,7 +594,7 @@ mjx-container[display="true"] + br {
 <p>右侧上半部分“更改”可以看到当前本地目录与仓库最新提交的不同之处。下半部分“图表”是提交历史。</p>
 <h3 id="创建（checkout）新分支"><a href="#创建（checkout）新分支" class="headerlink" title="创建（checkout）新分支"></a>创建（checkout）新分支</h3><p><img src="/../image/%E7%94%A8git%E5%8D%8F%E4%BD%9C/1791886810054.png"></p>
 <p><img src="/../image/%E7%94%A8git%E5%8D%8F%E4%BD%9C/1791886770565.png"></p>
-<h3 id="暂存更改"><a href="#暂存更改" class="headerlink" title="暂存更改"></a>暂存更改</h3><p>将鼠标悬停在文件名上, 会发现右边浮现了三个按钮, 第一个是打开文件, 第二个是“放弃更改”，慎点，意思是将文件退回到最后一次提交时的状态。第三个“暂存更改”，作用完全等同 <code>git add &lt;文件名&gt;</code>。点击后会发现该文件被放入了“暂存的更改”。</p>
+<h3 id="暂存更改"><a href="#暂存更改" class="headerlink" title="暂存更改"></a>暂存更改</h3><p>将鼠标悬停在文件名上, 会发现右边浮现了三个按钮, 第一个是打开文件, 第二个是“放弃更改”，慎点，意思是将工作区中的文件恢复到暂存区里的版本；如果该文件没有暂存过改动，就等同于恢复到最近一次提交时的状态。第三个“暂存更改”，作用完全等同 <code>git add &lt;文件名&gt;</code>。点击后会发现该文件被放入了“暂存的更改”。</p>
 <p><img src="/../image/%E7%94%A8git%E5%8D%8F%E4%BD%9C/1791884575013.png"></p>
 <p><img src="/../image/%E7%94%A8git%E5%8D%8F%E4%BD%9C/1791884599113.png"></p>
 <p>如果悬停在“更改”行，右边也会有“+”号，点击后会暂存所有更改：</p>
@@ -585,8 +602,8 @@ mjx-container[display="true"] + br {
 <h3 id="提交更改"><a href="#提交更改" class="headerlink" title="提交更改"></a>提交更改</h3><p>在“消息”输入框输入commit信息，点击提交：</p>
 <p><img src="/../image/%E7%94%A8git%E5%8D%8F%E4%BD%9C/1791885450533.png"></p>
 <p><img src="/../image/%E7%94%A8git%E5%8D%8F%E4%BD%9C/1791885499730.png"></p>
-<p>可以看到，“图表”列多了一行，并且颜色与原先不同。意思是提交已经暂存到了本地分支</p>
-<h3 id="推送提交"><a href="#推送提交" class="headerlink" title="推送提交"></a>推送提交</h3><p>原来的提交会变为“发布Branch”或“同步”。点击。</p>
+<p>可以看到，“图表（Graph）”区域多了一条提交记录。这说明这次提交已经记录到了本地分支，但还没有推送到远程仓库</p>
+<h3 id="推送提交"><a href="#推送提交" class="headerlink" title="推送提交"></a>推送提交</h3><p>提交后，源代码管理视图中的按钮会变成“发布分支”（Publish Branch）或“同步更改”（Sync Changes）。第一次推送时点击“发布分支”；以后远端有新提交时点击“同步更改”，它会先拉取远程改动，再推送本地提交。</p>
 
                 
             </div>

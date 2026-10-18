@@ -12,7 +12,7 @@ www.cnblogs.com/ttmaoxianjun/articles/14617125.html
 
 ⚠️注意：git ≠ Github！！
 安装
-git W">
+Git f">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -488,8 +488,8 @@ mjx-container[display="true"] + br {
 </ul>
 <p>⚠️注意：<strong>git ≠ Github</strong>！！</p>
 <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://github.com/git-for-windows/git/releases/latest">git Windows 版下载</a></li>
-<li><a target="_blank" rel="noopener" href="http://git-scm.com/download/mac">git OSx 版下载</a></li>
+<li><a target="_blank" rel="noopener" href="https://git-scm.com/download/win">Git for Windows 下载</a></li>
+<li><a target="_blank" rel="noopener" href="https://git-scm.com/download/mac">Git for macOS 下载</a></li>
 </ul>
 <h2 id="绑定git与github账号"><a href="#绑定git与github账号" class="headerlink" title="绑定git与github账号"></a>绑定git与github账号</h2><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/ttmaoxianjun/articles/14617125.html">绑定git与github账号</a></p>
 <h2 id="在本地创建一个新仓库"><a href="#在本地创建一个新仓库" class="headerlink" title="在本地创建一个新仓库"></a>在本地创建一个新仓库</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> init<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -499,16 +499,192 @@ mjx-container[display="true"] + br {
 
 <h2 id="工作流"><a href="#工作流" class="headerlink" title="工作流"></a>工作流</h2><p>你的本地仓库由 git 维护的三棵“树”组成。第一个是你的 <code>工作目录</code>，它持有实际文件；第二个是 <code>暂存区（Index）</code>，它像个缓存区域，临时保存你的改动；最后是 <code>HEAD</code>，它指向你最后一次提交的结果。</p>
 <p><img src="https://www.runoob.com/manual/git-guide/img/trees.png"></p>
-<h2 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h2><p>分支是用来将特性开发绝缘开来的。在你创建仓库的时候，<code>master</code> 是“默认的”分支。在其他分支上进行开发，完成后再将它们合并到主分支上。</p>
-<p>如果你正在与他人合作一个项目，<strong>一定要先创建一个不同于master的分支！</strong></p>
+<h2 id="用-Minecraft-类比理解-Git"><a href="#用-Minecraft-类比理解-Git" class="headerlink" title="用 Minecraft 类比理解 Git"></a>用 Minecraft 类比理解 Git</h2><p>如果你玩过 Minecraft，可以把 Git 想象成一套“世界存档管理系统”。虽然 Git 管理的是文件和提交，不是方块和世界，但很多概念可以一一对应：</p>
+<table>
+<thead>
+<tr>
+<th>Minecraft 中的东西</th>
+<th>Git 中的概念</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>你当前加载、正在建造的世界</td>
+<td>工作目录（Working Directory）</td>
+<td>你直接修改文件的地方；这里的变化 Git 不一定已经记录</td>
+</tr>
+<tr>
+<td>把想保存的方块放进箱子 &#x2F; 潜影盒</td>
+<td>暂存区（Index &#x2F; Staging Area）</td>
+<td>挑选这一轮要写进存档的改动，相当于“待提交清单”</td>
+</tr>
+<tr>
+<td>给世界拍一张带备注的完整快照</td>
+<td>提交（commit）</td>
+<td>一次不可变的记录，包含作者、时间、说明和当时的世界状态</td>
+</tr>
+<tr>
+<td>存档文件夹里的一串备份</td>
+<td>本地仓库（<code>.git</code> 目录）</td>
+<td>保存所有提交历史的地方</td>
+</tr>
+<tr>
+<td>你当前正在查看或继续游玩的那个存档点</td>
+<td>HEAD</td>
+<td>指向当前分支最近一次提交</td>
+</tr>
+<tr>
+<td>多个互不干扰的平行世界</td>
+<td>分支（branch）</td>
+<td>例如 <code>master</code>&#x2F;<code>main</code> 是主世界，<code>feature/x</code> 是用来做实验的世界</td>
+</tr>
+<tr>
+<td>服务器上的公共世界</td>
+<td>远程仓库（remote，如 GitHub&#x2F;Gitee）</td>
+<td>大家可以共同上传、下载存档</td>
+</tr>
+<tr>
+<td>第一次从服务器下载整个世界</td>
+<td><code>git clone</code></td>
+<td>把远程仓库完整复制到本地</td>
+</tr>
+<tr>
+<td>把本地的新建筑上传到服务器</td>
+<td><code>git push</code></td>
+<td>让其他人也能看到你的提交</td>
+</tr>
+<tr>
+<td>下载服务器上的新建筑并合并</td>
+<td><code>git pull</code></td>
+<td>相当于 <code>git fetch</code>（下载）+ <code>git merge</code>（合并）</td>
+</tr>
+<tr>
+<td>把实验世界里的建筑搬进主世界</td>
+<td><code>git merge</code></td>
+<td>把另一个分支的提交合并到当前分支</td>
+</tr>
+<tr>
+<td>同一坐标被两个世界放了不同方块</td>
+<td>冲突（conflict）</td>
+<td>Git 无法自动决定保留哪个，需要你手动选择</td>
+</tr>
+<tr>
+<td>不把临时截图、日志文件放进存档</td>
+<td><code>.gitignore</code></td>
+<td>告诉 Git 哪些文件不需要跟踪</td>
+</tr>
+</tbody></table>
+<p>一次典型的“Minecraft 式”Git 流程：</p>
+<ol>
+<li>新建一个空世界：<code>git init</code></li>
+<li>在世界里建造、挖矿，也就是修改文件。</li>
+<li>把这一轮想保存的方块放进箱子：<code>git add &lt;filename&gt;</code>；确认无误后再提交。</li>
+<li>给世界拍一张带备注的快照：<code>git commit -m &quot;feat: 建了一座城堡&quot;</code>。</li>
+<li>想试验一个危险的改造？开一个平行世界：<code>git checkout -b feature/castle</code>。</li>
+<li>实验成功后，把平行世界合并回主世界：先 <code>git checkout master</code>，再 <code>git merge feature/castle</code>。</li>
+<li>把主世界同步到服务器：<code>git push</code>。</li>
+<li>队友上传了新建筑：<code>git pull</code>，把他们的改动下载并合并到你的世界。</li>
+</ol>
+<h3 id="建造大型建筑：从主分支的同一个基础上开分支"><a href="#建造大型建筑：从主分支的同一个基础上开分支" class="headerlink" title="建造大型建筑：从主分支的同一个基础上开分支"></a>建造大型建筑：从主分支的同一个基础上开分支</h3><p>大型建筑不是一下子就能完成的。你会先打地基，再砌墙，然后建塔楼、盖屋顶、做装饰；每完成一个模块，就想先保存一下，以免后面的实验把成果弄坏。Git 管理代码的过程几乎一样。</p>
+<p>更重要的是：<strong>新建分支不是另起一座空城堡</strong>。执行 <code>git checkout -b feature/tower</code> 时，Git 会从当前提交（通常是 <code>main</code> 的最新状态）拉出一条新的开发线。两个分支共享之前的地基和城墙，只是从这里开始各自修改、添加部件。</p>
+<p><img src="/../image/git-minecraft/minecraft-git-multibranch.png" alt="多分支：都从主分支的同一个基础上改"></p>
+<p>图中 <code>main</code> 的 C2 是共同基础：地基、城墙和城门已经完成。<code>feature/tower</code> 和 <code>feature/garden</code> 都从 C2 出发：</p>
+<ul>
+<li><code>feature/tower</code> 在左侧墙的位置加塔楼，再给塔楼加屋顶；</li>
+<li><code>feature/garden</code> 在城前加花园，并把左侧墙改成拱门；</li>
+<li>两个分支都包含 C0 → C1 → C2 的历史，不是各自从空世界重新搭一遍。</li>
+</ul>
+<p>对应命令如下（下面以 <code>main</code> 为例；如果默认分支叫 <code>master</code>，请自行替换）：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 1. main 上先完成共同基础</span>
+<span class="token function">git</span> checkout main
+<span class="token function">git</span> <span class="token function">add</span> <span class="token builtin class-name">.</span>
+<span class="token function">git</span> commit <span class="token parameter variable">-m</span> <span class="token string">"feat: 完成地基"</span>
+<span class="token comment"># ...砌墙...</span>
+<span class="token function">git</span> <span class="token function">add</span> <span class="token builtin class-name">.</span>
+<span class="token function">git</span> commit <span class="token parameter variable">-m</span> <span class="token string">"feat: 完成城墙和城门"</span>
+
+<span class="token comment"># 2. 从 main 当前状态开分支，在已有城墙上加左侧塔楼</span>
+<span class="token function">git</span> checkout <span class="token parameter variable">-b</span> feature/tower
+<span class="token comment"># ...加塔楼...</span>
+<span class="token function">git</span> <span class="token function">add</span> <span class="token builtin class-name">.</span>
+<span class="token function">git</span> commit <span class="token parameter variable">-m</span> <span class="token string">"feat: 加左侧塔楼"</span>
+<span class="token comment"># ...继续加屋顶...</span>
+<span class="token function">git</span> <span class="token function">add</span> <span class="token builtin class-name">.</span>
+<span class="token function">git</span> commit <span class="token parameter variable">-m</span> <span class="token string">"feat: 给塔楼加屋顶"</span>
+
+<span class="token comment"># 3. 回到 main 的 C2，再从同一个基础开另一条分支</span>
+<span class="token function">git</span> checkout main
+<span class="token function">git</span> checkout <span class="token parameter variable">-b</span> feature/garden
+<span class="token comment"># ...在已有城堡外圈加花园...</span>
+<span class="token function">git</span> <span class="token function">add</span> <span class="token builtin class-name">.</span>
+<span class="token function">git</span> commit <span class="token parameter variable">-m</span> <span class="token string">"feat: 加花园"</span>
+<span class="token comment"># ...把左墙改成拱门...</span>
+<span class="token function">git</span> <span class="token function">add</span> <span class="token builtin class-name">.</span>
+<span class="token function">git</span> commit <span class="token parameter variable">-m</span> <span class="token string">"feat: 把左墙改成拱门"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="合并多个分支：为什么会冲突？"><a href="#合并多个分支：为什么会冲突？" class="headerlink" title="合并多个分支：为什么会冲突？"></a>合并多个分支：为什么会冲突？</h3><p>如果两个分支改的是不同区域，Git 通常能自动合并。例如先把 <code>feature/tower</code> 合入 <code>main</code>：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> checkout main
+<span class="token function">git</span> merge --no-ff feature/tower<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p><code>--no-ff</code> 表示即使可以快进也创建一个合并提交，方便在历史里保留“曾经有过这条分支”的记录；不关心这一点时也可以直接 <code>git merge feature/tower</code>。</p>
+</blockquote>
+<p>这时 <code>main</code> 的城堡已经有塔楼。接着合并 <code>feature/garden</code>：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> merge feature/garden<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>问题出现了：两个分支都改过左侧墙的同一块区域——一个把它变成塔楼，另一个把它改成花园拱门。Git 能发现两边改了同一处，却无法判断你更想要哪种设计，于是报告<strong>冲突（conflict）</strong>。</p>
+<blockquote>
+<p>Git 实际比较的是文件内容和行，不是方块坐标；图中“同一面墙”对应的是同一段被两边修改的代码。</p>
+</blockquote>
+<p><img src="/../image/git-minecraft/minecraft-git-conflict.png" alt="合并冲突：两个分支改了同一面墙"></p>
+<p>冲突时，<code>git status</code> 会列出冲突文件，Git 还会在文件里插入类似下面的标记：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+左侧塔楼
+=======
+花园拱门
+>>>>>>> feature/garden<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>你需要手动编辑文件，决定或重新设计最终结果。例如保留左侧塔楼，把拱门移到右侧墙，同时保留花园。修改完成后：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> <span class="token function">add</span> <span class="token operator">&lt;</span>冲突文件<span class="token operator">></span>
+<span class="token function">git</span> commit <span class="token parameter variable">-m</span> <span class="token string">"merge: 解决塔楼与花园拱门的冲突"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>如果暂时不想解决，可以执行 <code>git merge --abort</code> 放弃这次合并，回到合并前的状态。</p>
+<h3 id="完整提交图"><a href="#完整提交图" class="headerlink" title="完整提交图"></a>完整提交图</h3><p>把整个协作过程画成提交图，就是下面这样。图中每个节点都画成了当时世界的实际样子，而不是抽象色块：</p>
+<p><img src="/../image/git-minecraft/minecraft-git-graph.png" alt="完整多分支提交图"></p>
+<ul>
+<li><code>C0 → C1 → C2</code> 是 <code>main</code> 上的共同基础；</li>
+<li><code>T1 → T2</code> 是 <code>feature/tower</code> 在 C2 基础上添加塔楼和屋顶；</li>
+<li><code>G1 → G2</code> 是 <code>feature/garden</code> 同样从 C2 出发添加花园、修改左墙；</li>
+<li><code>M1</code> 是合并塔楼分支后的 <code>main</code>；</li>
+<li><code>C!</code> 表示合并花园分支时发生冲突，并不是一个普通提交；</li>
+<li><code>M2</code> 是解决冲突后的最终合并提交。</li>
+</ul>
+<p>从图里可以看出：两个功能分支不是各自独立地从零建造，而是<strong>共享主分支已有的基础</strong>，只在各自的开发线上修改自己关心的部分。冲突则发生在它们改到同一处的时候。</p>
+<blockquote>
+<p>小技巧：<code>git log --graph --oneline --all --decorate</code> 可以查看类似的提交历史；其中 <code>--all</code> 才能同时看到所有分支。</p>
+</blockquote>
+<p>如果实验失败，也可以像游戏回档一样撤销改动：<code>git restore &lt;filename&gt;</code> 会把文件恢复到暂存区中的版本；<code>git reset --hard &lt;commit&gt;</code> 则会把当前分支直接退回到指定提交，并丢弃已跟踪文件的未提交改动，务必谨慎。</p>
+<blockquote>
+<p>类比只是为了帮助理解，并不完全等同：Git 的分支本质上只是一个指向某次提交的轻量指针，并不是真的复制了一整个世界；Git 通过快照和内容寻址高效保存文件，实际行为仍以命令和 Git 文档为准。</p>
+</blockquote>
+<h2 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h2><p>分支是用来将特性开发隔离开来的。新建仓库时的默认分支可能是 <code>master</code>，也可能是 <code>main</code>（取决于 Git 版本和配置；GitHub 等平台现在通常使用 <code>main</code>）。可以用下面的命令查看当前分支名：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> branch --show-current<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>如果你正在与他人合作一个项目，<strong>建议不要直接在主分支（<code>master</code> 或 <code>main</code>）上开发，而是先创建一个功能分支！</strong></p>
 <p><img src="https://www.runoob.com/manual/git-guide/img/branches.png"></p>
 <p>创建一个叫做“feature_x”的分支，并切换过去：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> checkout <span class="token parameter variable">-b</span> feature_x<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
+<blockquote>
+<p>Git 2.23 及以上版本也可以使用 <code>git switch -c feature_x</code>。</p>
+</blockquote>
 <h2 id="添加和提交"><a href="#添加和提交" class="headerlink" title="添加和提交"></a>添加和提交</h2><p>你可以提出更改（把它们添加到暂存区），使用如下命令：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> <span class="token function">add</span> <span class="token operator">&lt;</span>filename<span class="token operator">></span> <span class="token comment">#添加指定文件到暂存区</span>
-<span class="token function">git</span> <span class="token function">add</span> * <span class="token comment">#添加所有改变的文件到暂存区</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> <span class="token function">add</span> <span class="token operator">&lt;</span>filename<span class="token operator">></span> <span class="token comment"># 添加指定文件到暂存区</span>
+<span class="token function">git</span> <span class="token function">add</span> <span class="token builtin class-name">.</span>          <span class="token comment"># 添加当前目录下的所有改动（包括新建、修改和删除的文件）</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
+<blockquote>
+<p><code>git add *</code> 依赖 shell 展开，通常不会包含以 <code>.</code> 开头的隐藏文件，因此更推荐 <code>git add .</code>；如果要暂存整个仓库的改动，也可以使用 <code>git add -A</code>。</p>
+</blockquote>
 <p>这是 git 基本工作流程的第一步；使用如下命令以实际提交改动：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> commit <span class="token parameter variable">-m</span> <span class="token string">"代码提交信息"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
@@ -516,25 +692,37 @@ mjx-container[display="true"] + br {
 <h2 id="更新与合并"><a href="#更新与合并" class="headerlink" title="更新与合并"></a>更新与合并</h2><p>要更新你的本地仓库至最新改动，执行：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> pull<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p>以在你的工作目录中 <em>获取（fetch）</em> 并 <em>合并（merge）</em> 远端的改动。</p>
+<p>它相当于先 <em>获取（fetch）</em> 远端的新提交，再 <em>合并（merge）</em> 到当前分支。</p>
 <p>要合并其他分支到你的当前分支（例如 master），执行：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> merge <span class="token operator">&lt;</span>branch<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>在这两种情况下，git 都会尝试去自动合并改动。遗憾的是，这可能并非每次都成功，并可能出现 <em>冲突（conflicts）</em>。这时候就需要你修改这些文件来手动合并这些<em>冲突（conflicts）</em>。</p>
-<h2 id="推送改动到远程仓库"><a href="#推送改动到远程仓库" class="headerlink" title="推送改动到远程仓库"></a>推送改动到远程仓库</h2><p>你的改动现在已经在本地仓库的 HEAD 中了。在推送到远端之前，为了避免在远端冲突，一定要先执行</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> pull<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>之后，执行如下命令以将这些改动提交到远端仓库：</p>
+<h2 id="推送改动到远程仓库"><a href="#推送改动到远程仓库" class="headerlink" title="推送改动到远程仓库"></a>推送改动到远程仓库</h2><p>你的改动现在已经在本地仓库的 HEAD 中了。推送前建议先执行 <code>git pull</code>（或用 <code>git fetch</code> 检查远端是否有新提交），否则远端有新提交时，<code>git push</code> 可能会被拒绝。</p>
+<p>然后执行如下命令，将这些改动推送到远端仓库：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> push origin feature_x<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>可以把 feature_x 换成你想要推送的任何分支。</p>
-<h2 id="替换本地改动"><a href="#替换本地改动" class="headerlink" title="替换本地改动"></a>替换本地改动</h2><p>假如你操作失误（当然，这最好永远不要发生），你可以使用如下命令替换掉本地改动：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> checkout -- <span class="token operator">&lt;</span>filename<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="撤销本地改动"><a href="#撤销本地改动" class="headerlink" title="撤销本地改动"></a>撤销本地改动</h2><p>假如你操作失误（当然，这最好永远不要发生），可以使用如下命令把工作目录中的某个文件恢复成<strong>暂存区</strong>中的版本：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> restore <span class="token operator">&lt;</span>filename<span class="token operator">></span>
+<span class="token comment"># 旧版本 Git 也可以使用：</span>
+<span class="token function">git</span> checkout -- <span class="token operator">&lt;</span>filename<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
-<p>此命令会使用 HEAD 中的最新内容替换掉你的工作目录中的文件。已添加到暂存区的改动以及新文件都不会受到影响。</p>
-<p>假如你想丢弃你在本地的所有改动与提交，可以到服务器上获取最新的版本历史，并将你本地主分支指向它：</p>
+<p>注意：这两个命令使用的是<strong>暂存区（Index）中的内容，而不是 HEAD</strong>。因此：</p>
+<ul>
+<li>如果改动已经 <code>git add</code> 过，恢复出来的是暂存后的版本；</li>
+<li>已暂存的改动本身不会被取消；</li>
+<li>新创建的未跟踪文件不会受影响。</li>
+</ul>
+<p>如果想把文件恢复成**最近一次提交（HEAD）**的版本，并同时取消暂存，可以执行：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> restore <span class="token parameter variable">--source</span><span class="token operator">=</span>HEAD <span class="token parameter variable">--staged</span> <span class="token parameter variable">--worktree</span> <span class="token operator">&lt;</span>filename<span class="token operator">></span>
+<span class="token comment"># 或者</span>
+<span class="token function">git</span> checkout HEAD -- <span class="token operator">&lt;</span>filename<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>假如你想丢弃本地所有<strong>已跟踪文件的改动和本地提交</strong>，可以先从远端获取最新历史，再把当前分支重置到远端分支：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> fetch origin
-<span class="token function">git</span> reset <span class="token parameter variable">--hard</span> origin/master <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<span class="token function">git</span> reset <span class="token parameter variable">--hard</span> origin/master   <span class="token comment"># 如果默认分支叫 main，则改为 origin/main</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><code>git reset --hard</code> 不会删除未跟踪的新文件；如果确实要连这些文件一起删除，可以使用 <code>git clean -fd</code>，但该命令不可恢复，执行前务必确认。</p>
 
                 
             </div>
