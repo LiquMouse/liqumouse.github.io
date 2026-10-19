@@ -558,92 +558,8 @@ mjx-container[display="true"] + br {
 <span class="token function">git</span> reset <span class="token parameter variable">--hard</span> origin/master   <span class="token comment"># 如果默认分支叫 main，则改为 origin/main</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p><code>git reset --hard</code> 不会删除未跟踪的新文件；如果确实要连这些文件一起删除，可以使用 <code>git clean -fd</code>，但该命令不可恢复，执行前务必确认。</p>
-<h2 id="用-Minecraft-类比理解-Git"><a href="#用-Minecraft-类比理解-Git" class="headerlink" title="用 Minecraft 类比理解 Git"></a>用 Minecraft 类比理解 Git</h2><p>前面介绍的是基本命令；现在换一个角度，把 Git 的整体流程串起来。如果你玩过 Minecraft，可以把 Git 想象成一套“世界存档管理系统”。虽然 Git 管理的是文件和提交，不是方块和世界，但很多概念可以一一对应：</p>
-<table>
-<thead>
-<tr>
-<th>Minecraft 中的东西</th>
-<th>Git 中的概念</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>你当前加载、正在建造的世界</td>
-<td>工作目录（Working Directory）</td>
-<td>你直接修改文件的地方；这里的变化 Git 不一定已经记录</td>
-</tr>
-<tr>
-<td>把想保存的方块放进箱子 &#x2F; 潜影盒</td>
-<td>暂存区（Index &#x2F; Staging Area）</td>
-<td>挑选这一轮要写进存档的改动，相当于“待提交清单”</td>
-</tr>
-<tr>
-<td>给世界拍一张带备注的完整快照</td>
-<td>提交（commit）</td>
-<td>一次不可变的记录，包含作者、时间、说明和当时的世界状态</td>
-</tr>
-<tr>
-<td>存档文件夹里的一串备份</td>
-<td>本地仓库（<code>.git</code> 目录）</td>
-<td>保存所有提交历史的地方</td>
-</tr>
-<tr>
-<td>你当前正在查看或继续游玩的那个存档点</td>
-<td>HEAD</td>
-<td>指向当前分支最近一次提交</td>
-</tr>
-<tr>
-<td>多个互不干扰的平行世界</td>
-<td>分支（branch）</td>
-<td>例如 <code>master</code>&#x2F;<code>main</code> 是主世界，<code>feature/x</code> 是用来做实验的世界</td>
-</tr>
-<tr>
-<td>服务器上的公共世界</td>
-<td>远程仓库（remote，如 GitHub&#x2F;Gitee）</td>
-<td>大家可以共同上传、下载存档</td>
-</tr>
-<tr>
-<td>第一次从服务器下载整个世界</td>
-<td><code>git clone</code></td>
-<td>把远程仓库完整复制到本地</td>
-</tr>
-<tr>
-<td>把本地的新建筑上传到服务器</td>
-<td><code>git push</code></td>
-<td>让其他人也能看到你的提交</td>
-</tr>
-<tr>
-<td>下载服务器上的新建筑并合并</td>
-<td><code>git pull</code></td>
-<td>相当于 <code>git fetch</code>（下载）+ <code>git merge</code>（合并）</td>
-</tr>
-<tr>
-<td>把实验世界里的建筑搬进主世界</td>
-<td><code>git merge</code></td>
-<td>把另一个分支的提交合并到当前分支</td>
-</tr>
-<tr>
-<td>同一坐标被两个世界放了不同方块</td>
-<td>冲突（conflict）</td>
-<td>Git 无法自动决定保留哪个，需要你手动选择</td>
-</tr>
-<tr>
-<td>不把临时截图、日志文件放进存档</td>
-<td><code>.gitignore</code></td>
-<td>告诉 Git 哪些文件不需要跟踪</td>
-</tr>
-</tbody></table>
-<p>一次典型的“Minecraft 式”Git 流程：</p>
-<ol>
-<li>新建一个空世界：<code>git init</code></li>
-<li>在世界里建造、挖矿，也就是修改文件。</li>
-<li>把这一轮想保存的方块放进箱子：<code>git add &lt;filename&gt;</code>；确认无误后再提交。</li>
-<li>给世界拍一张带备注的快照：<code>git commit -m &quot;feat: 建了一座城堡&quot;</code>。</li>
-<li>想试验一个危险的改造？开一个平行世界：<code>git checkout -b feature/castle</code>。</li>
-<li>实验成功后，把平行世界合并回主世界：先 <code>git checkout master</code>，再 <code>git merge feature/castle</code>。</li>
-<li>把主世界同步到服务器：<code>git push</code>。</li>
-<li>队友上传了新建筑：<code>git pull</code>，把他们的改动下载并合并到你的世界。</li>
-</ol>
+<h2 id="用-Minecraft-类比理解-Git"><a href="#用-Minecraft-类比理解-Git" class="headerlink" title="用 Minecraft 类比理解 Git"></a>用 Minecraft 类比理解 Git</h2><p>前面介绍的是基本命令；现在换一个角度，用一个具体的 Minecraft 建造故事把 Git 的整体流程串起来。</p>
+<p>可以把 <code>main</code> 想成大家的 Minecraft 主世界：你当前建造的世界是工作目录；先把这一轮要保存的改动放进“箱子”（暂存区），再给世界拍一张带备注的存档（<code>commit</code>）；<code>branch</code> 是从当前存档复制出来的平行世界；<code>merge</code> 是把平行世界的改动搬回主世界；如果两个人改了同一面墙，就会发生冲突，需要手动决定保留哪些方块。</p>
 <h3 id="建造大型建筑：从主分支的同一个基础上开分支"><a href="#建造大型建筑：从主分支的同一个基础上开分支" class="headerlink" title="建造大型建筑：从主分支的同一个基础上开分支"></a>建造大型建筑：从主分支的同一个基础上开分支</h3><p>假设你要建一栋大房子：先打好地基、砌好墙和城门，这就是 <code>main</code> 上的 C2。现在有两位朋友来帮忙，还有一个“朋友”其实是苦力怕。</p>
 <ul>
 <li>朋友 A 开分支 <code>feature/tower</code>，在你建好的房子左侧墙加塔楼；</li>
@@ -715,7 +631,7 @@ mjx-container[display="true"] + br {
 <blockquote>
 <p>被拒绝的分支不会自动消失；Git 不会替你判断“这个分支没用”，需要你明确删除它。</p>
 </blockquote>
-<h3 id="分支与合并图"><a href="#分支与合并图" class="headerlink" title="分支与合并图"></a>分支与合并图</h3><p>把整个过程画成图，就是下面这样。图中每个节点都是当时房子的实际样子，而不是抽象色块：</p>
+<h3 id="分支与合并图"><a href="#分支与合并图" class="headerlink" title="分支与合并图"></a>分支与合并图</h3><p>把整个过程画成图，就是下面这样：</p>
 <p><img src="/../image/git-minecraft/minecraft-git-graph.png" alt="分支与合并图：A、B 改同一面墙，苦力怕分支被丢弃"></p>
 <ul>
 <li>C0、C1 是更早的初始化和地基提交，图中从 C2“你建好的房子”开始画；</li>
