@@ -646,12 +646,12 @@ mjx-container[display="true"] + br {
 </ol>
 <h3 id="建造大型建筑：从主分支的同一个基础上开分支"><a href="#建造大型建筑：从主分支的同一个基础上开分支" class="headerlink" title="建造大型建筑：从主分支的同一个基础上开分支"></a>建造大型建筑：从主分支的同一个基础上开分支</h3><p>假设你要建一栋大房子：先打好地基、砌好墙和城门，这就是 <code>main</code> 上的 C2。现在有两位朋友来帮忙，还有一个“朋友”其实是苦力怕。</p>
 <ul>
-<li>朋友 A 开分支 <code>feature/tower</code>，在你建好的房子左侧加塔楼；</li>
-<li>朋友 B 开分支 <code>feature/garden</code>，在房子前面加花园；</li>
-<li>苦力怕开分支 <code>feature/boom</code>，在左墙放 TNT，把墙炸出一个大洞。</li>
+<li>朋友 A 开分支 <code>feature/tower</code>，在你建好的房子左侧墙加塔楼；</li>
+<li>朋友 B 开分支 <code>feature/garden</code>，也在<strong>同一面左侧墙</strong>开拱门，并在门前加花园；</li>
+<li>苦力怕开分支 <code>feature/boom</code>，在左墙放 TNT，把房子炸了。</li>
 </ul>
-<p>关键点：<strong>这三个分支都不是从空地重新建一栋房子</strong>。执行 <code>git checkout -b ...</code> 时，Git 从当前提交（这里是 <code>main</code> 的 C2）拉出新的开发线；三个分支都共享 C0 → C1 → C2 的历史和同一栋房子，只是从 C2 开始各自修改不同区域。</p>
-<p><img src="/../image/git-minecraft/minecraft-git-multibranch.png" alt="一个基座，三个分支：两个朋友来帮忙，苦力怕来捣乱"></p>
+<p>关键点：<strong>这三个分支都不是从空地重新建一栋房子</strong>。执行 <code>git checkout -b ...</code> 时，Git 从当前提交（这里是 <code>main</code> 的 C2）拉出新的开发线；三个分支都共享 C0 → C1 → C2 的历史和同一栋房子，只是从 C2 开始各自修改。A 和 B 改到的是同一面墙，这正是后面冲突的来源。</p>
+<p><img src="/../image/git-minecraft/minecraft-git-multibranch.png" alt="一个基座，三个分支：A、B 改同一面墙，苦力怕炸房子"></p>
 <p>对应的命令如下（下面以 <code>main</code> 为例；如果默认分支叫 <code>master</code>，请自行替换）：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 1. main 上先完成共同的地基和房子</span>
 <span class="token function">git</span> checkout main
@@ -661,64 +661,73 @@ mjx-container[display="true"] + br {
 <span class="token function">git</span> <span class="token function">add</span> <span class="token builtin class-name">.</span>
 <span class="token function">git</span> commit <span class="token parameter variable">-m</span> <span class="token string">"feat: 完成墙和城门"</span>
 
-<span class="token comment"># 2. 朋友 A：从 C2 建分支，在已有房子上加塔楼</span>
+<span class="token comment"># 2. 朋友 A：从 C2 建分支，在左侧墙加塔楼</span>
 <span class="token function">git</span> checkout <span class="token parameter variable">-b</span> feature/tower
-<span class="token comment"># ...加塔楼和屋顶...</span>
+<span class="token comment"># ...在左墙加塔楼和屋顶...</span>
 <span class="token function">git</span> <span class="token function">add</span> <span class="token builtin class-name">.</span>
-<span class="token function">git</span> commit <span class="token parameter variable">-m</span> <span class="token string">"feat: 加左侧塔楼"</span>
+<span class="token function">git</span> commit <span class="token parameter variable">-m</span> <span class="token string">"feat: 在左侧墙加塔楼"</span>
 
 <span class="token comment"># 3. 朋友 B：回到 C2，再从同一个基础建分支</span>
 <span class="token function">git</span> checkout main
 <span class="token function">git</span> checkout <span class="token parameter variable">-b</span> feature/garden
-<span class="token comment"># ...种花、铺小路...</span>
+<span class="token comment"># ...在同一面左墙开拱门，并加花园...</span>
 <span class="token function">git</span> <span class="token function">add</span> <span class="token builtin class-name">.</span>
-<span class="token function">git</span> commit <span class="token parameter variable">-m</span> <span class="token string">"feat: 加花园"</span>
+<span class="token function">git</span> commit <span class="token parameter variable">-m</span> <span class="token string">"feat: 开拱门并加花园"</span>
 
-<span class="token comment"># 4. 苦力怕：同样从 C2 建分支，炸开左墙</span>
+<span class="token comment"># 4. 苦力怕：同样从 C2 建分支，炸房子</span>
 <span class="token function">git</span> checkout main
 <span class="token function">git</span> checkout <span class="token parameter variable">-b</span> feature/boom
 <span class="token comment"># ...在左墙放 TNT...</span>
 <span class="token function">git</span> <span class="token function">add</span> <span class="token builtin class-name">.</span>
-<span class="token function">git</span> commit <span class="token parameter variable">-m</span> <span class="token string">"feat: 炸开左墙"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">git</span> commit <span class="token parameter variable">-m</span> <span class="token string">"feat: 炸开房子"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h3 id="合并多个分支：为什么会冲突？"><a href="#合并多个分支：为什么会冲突？" class="headerlink" title="合并多个分支：为什么会冲突？"></a>合并多个分支：为什么会冲突？</h3><p>先合并两位朋友的分支：</p>
+<h3 id="合并多个分支：为什么会冲突？"><a href="#合并多个分支：为什么会冲突？" class="headerlink" title="合并多个分支：为什么会冲突？"></a>合并多个分支：为什么会冲突？</h3><p>先合并 A：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> checkout main
-<span class="token function">git</span> merge --no-ff feature/tower    <span class="token comment"># 得到 M1：塔楼合并进 main</span>
-<span class="token function">git</span> merge --no-ff feature/garden   <span class="token comment"># 得到 M2：花园也合并进 main</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<span class="token function">git</span> merge --no-ff feature/tower    <span class="token comment"># 得到 M1：塔楼合并进 main</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<p>因为塔楼和花园改的是不同区域，Git 通常能自动合并，不会冲突。</p>
-<p>接下来合并苦力怕的分支：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> merge feature/boom<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>再合并 B：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> merge --no-ff feature/garden   <span class="token comment"># 合并 B 时发生冲突</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p>问题出现了：<code>main</code> 在 M2 时，左侧墙的位置已经是塔楼；而 <code>feature/boom</code> 把同一面墙炸成了一个坑。两边都改了同一段内容，Git 无法判断你更想要“塔楼”还是“爆炸坑”，于是报告<strong>冲突（conflict）</strong>。</p>
+<p>问题出现了：A 和 B 都改了左侧墙的同一段内容——A 把它变成了塔楼，B 把它改成了拱门。Git 无法判断你更想要哪种设计，于是报告<strong>冲突（conflict）</strong>。</p>
 <blockquote>
 <p>Git 实际比较的是文件内容和行，不是方块坐标；图中“同一面墙”对应的是同一段被两边修改的代码。</p>
 </blockquote>
-<p><img src="/../image/git-minecraft/minecraft-git-conflict.png" alt="合并冲突：塔楼 vs 被苦力怕炸出的洞"></p>
+<p><img src="/../image/git-minecraft/minecraft-git-conflict.png" alt="合并冲突：A 和 B 改了同一面左墙"></p>
 <p>冲突时，<code>git status</code> 会列出冲突文件，Git 还会在文件里插入类似下面的标记：</p>
 <pre class="line-numbers language-text" data-language="text"><code class="language-text">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
 左侧塔楼
 =======
-爆炸坑
->>>>>>> feature/boom<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+左侧拱门
+>>>>>>> feature/garden<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>你需要手动编辑文件，决定或重新设计最终结果。例如：保留左侧塔楼，修复墙面，把炸出的坑改成一个水池。修改完成后：</p>
+<p>你需要手动编辑文件，决定或重新设计最终结果。例如：保留左侧塔楼，把拱门移到右侧墙，同时保留花园。修改完成后：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> <span class="token function">add</span> <span class="token operator">&lt;</span>冲突文件<span class="token operator">></span>
-<span class="token function">git</span> commit <span class="token parameter variable">-m</span> <span class="token string">"merge: 修复爆炸坑并保留塔楼和花园"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<span class="token function">git</span> commit <span class="token parameter variable">-m</span> <span class="token string">"merge: 解决塔楼与拱门的冲突"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>如果暂时不想解决，可以执行 <code>git merge --abort</code> 放弃这次合并，回到合并前的状态。</p>
+<p>解决冲突并提交后，<code>main</code> 得到 M2。接下来处理苦力怕的分支：<strong>它不应该合并进 main，直接丢弃即可。</strong></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 不要执行 git merge feature/boom</span>
+<span class="token function">git</span> checkout main
+<span class="token function">git</span> branch <span class="token parameter variable">-D</span> feature/boom                 <span class="token comment"># 删除本地分支</span>
+<span class="token function">git</span> push origin <span class="token parameter variable">--delete</span> feature/boom      <span class="token comment"># 如果远程也创建了这个分支</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><code>git branch -D</code> 会强制删除尚未合并的分支，这里正是我们想要的效果。如果之前已经尝试合并并停在冲突中，先执行 <code>git merge --abort</code>，再删除分支。</p>
+<blockquote>
+<p>被拒绝的分支不会自动消失；Git 不会替你判断“这个分支没用”，需要你明确删除它。</p>
+</blockquote>
 <h3 id="分支与合并图"><a href="#分支与合并图" class="headerlink" title="分支与合并图"></a>分支与合并图</h3><p>把整个过程画成图，就是下面这样。图中每个节点都是当时房子的实际样子，而不是抽象色块：</p>
-<p><img src="/../image/git-minecraft/minecraft-git-graph.png" alt="分支与合并图：两个朋友帮忙，苦力怕捣乱"></p>
+<p><img src="/../image/git-minecraft/minecraft-git-graph.png" alt="分支与合并图：A、B 改同一面墙，苦力怕分支被丢弃"></p>
 <ul>
 <li>C0、C1 是更早的初始化和地基提交，图中从 C2“你建好的房子”开始画；</li>
-<li><code>T1</code> 是 <code>feature/tower</code> 在 C2 基础上加塔楼；</li>
-<li><code>G1</code> 是 <code>feature/garden</code> 同样从 C2 出发加花园；</li>
-<li><code>X1</code> 是 <code>feature/boom</code> 从 C2 出发炸开左墙；</li>
-<li><code>M1</code> 是合并塔楼后的 <code>main</code>，<code>M2</code> 是继续合并花园后的 <code>main</code>；</li>
-<li><code>C!</code> 表示合并苦力怕分支时发生冲突，并不是一个普通提交；</li>
-<li><code>M3</code> 是解决冲突后的最终合并提交。</li>
+<li><code>T1</code> 是 <code>feature/tower</code>（A）在 C2 基础上改左侧墙、加塔楼；</li>
+<li><code>G1</code> 是 <code>feature/garden</code>（B）同样从 C2 出发，改同一面左墙、开拱门并加花园；</li>
+<li><code>X1</code> 是 <code>feature/boom</code>（苦力怕）从 C2 出发炸房子；</li>
+<li><code>M1</code> 是合并 A 后的 <code>main</code>；</li>
+<li><code>C!</code> 表示合并 B 时发生冲突，并不是一个普通提交；</li>
+<li><code>M2</code> 是解决 A、B 冲突后的最终合并提交；</li>
+<li><code>feature/boom</code> 没有合并进 <code>main</code>，图中用红色虚线和 ✕ 表示这个分支被丢弃。</li>
 </ul>
-<p>从图里可以看出：两个朋友和苦力怕都从同一个 C2 出发，共享你建好的房子；冲突发生在塔楼和爆炸坑改到同一面墙的时候。</p>
+<p>从图里可以看出：A 和 B 都从同一个 C2 出发、改到同一面墙，所以合并 B 时冲突；而苦力怕的分支从头到尾都没有进入主分支。</p>
 <blockquote>
 <p>小技巧：<code>git log --graph --oneline --all --decorate</code> 可以查看类似的提交历史；其中 <code>--all</code> 才能同时看到所有分支。</p>
 </blockquote>

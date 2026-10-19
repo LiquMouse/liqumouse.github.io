@@ -507,9 +507,7 @@ mjx-container[display="true"] + br {
 <p><strong>Minecraft 类比</strong>：把 <code>main</code> 想成大家的 Minecraft 主世界。每个人先从主世界复制一份存档（创建分支），在自己的存档里加东西（提交），完成后把改动合回主世界（PR + merge）。如果两个人改了同一面墙，就会冲突，需要手动决定保留哪些方块。</p>
 <p>更完整的 Minecraft 类比见 <a href="https://liqumouse.github.io/2026/07/06/Simple-Git-Guide#%E7%94%A8-Minecraft-%E7%B1%BB%E6%AF%94%E7%90%86%E8%A7%A3-Git">Simple Git Guide 的「用 Minecraft 类比理解 Git」</a>。</p>
 </blockquote>
-<h2 id="命令行操作"><a href="#命令行操作" class="headerlink" title="命令行操作"></a>命令行操作</h2><h3 id="获取远程仓库（推荐-clone）"><a href="#获取远程仓库（推荐-clone）" class="headerlink" title="获取远程仓库（推荐 clone）"></a>获取远程仓库（推荐 clone）</h3><blockquote>
-<p><strong>建议</strong>：在一个空文件夹中进行操作；如果目录里已经有文件，先备份。路径尽量使用英文，减少少数工具的兼容性问题。</p>
-</blockquote>
+<h2 id="命令行操作"><a href="#命令行操作" class="headerlink" title="命令行操作"></a>命令行操作</h2><h3 id="获取远程仓库（推荐-clone）"><a href="#获取远程仓库（推荐-clone）" class="headerlink" title="获取远程仓库（推荐 clone）"></a>获取远程仓库（推荐 clone）</h3><p><strong>⚠️注意: 如果你不熟悉, 建议在<span style="font-size:2em; font-weight:900; line-height:1; background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #00ffff, #0000ff, #8f00ff); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent;">空文件夹</span>中进行以下操作, 避免与已有文件发生冲突; 操作前请先备份重要文件. 路径含中文或空格通常也能正常工作, 但为了减少工具兼容性问题, 建议使用<span style="font-size:2em; font-weight:900; line-height:1; background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #00ffff, #0000ff, #8f00ff); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent;">纯英文路径</span>.</strong> 后续再把已有代码迁移进来</p>
 <ol>
 <li><p>配置身份验证。推荐使用 SSH：把本机 SSH 公钥添加到 Gitee 或 GitHub。Gitee 的设置方法见 <a target="_blank" rel="noopener" href="https://help.gitee.com/base/account/SSH%E5%85%AC%E9%92%A5%E8%AE%BE%E7%BD%AE/">SSH公钥设置</a>。如果暂时不想配置 SSH，也可以使用 HTTPS 地址，按提示输入账号和密码&#x2F;访问令牌。</p>
 </li>
