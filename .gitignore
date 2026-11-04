@@ -2,6 +2,14 @@
 .obsidian/workspace.json
 .obsidian/workspace-mobile.json
 .obsidian/cache
+.trash/
+
+# 插件本体从社区市场安装，不进仓库
+.obsidian/plugins/*
+!.obsidian/plugins/templater-obsidian/
+.obsidian/plugins/templater-obsidian/*
+# 模板规则可以跨设备共享，保留；git 插件的设置含路径与凭据，不共享
+!.obsidian/plugins/templater-obsidian/data.json
 
 # 系统
 .DS_Store
