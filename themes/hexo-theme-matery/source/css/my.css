@@ -108,3 +108,97 @@ html {
 html {
     scroll-behavior: smooth;
 }
+
+/* ------------------------------------------------------------------
+ * Obsidian 风格标注块（markdown-it-obsidian-callouts 输出）
+ * 语法：> [!note] 标题 / > [!warning] ... / > [!tip]
+ * ------------------------------------------------------------------ */
+.callout {
+  --callout-color: 68, 138, 255;
+  border-left: 4px solid rgb(var(--callout-color));
+  background-color: rgba(var(--callout-color), 0.08);
+  border-radius: 6px;
+  margin: 1rem 0;
+  padding: 0.7rem 1rem;
+}
+
+.callout-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  color: rgb(var(--callout-color));
+  line-height: 1.4;
+}
+
+.callout-title-icon {
+  display: inline-flex;
+  align-items: center;
+}
+
+.callout-title-icon svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+}
+
+.callout-title-inner {
+  flex: 1;
+}
+
+.callout-content {
+  margin-top: 0.45rem;
+}
+
+.callout-content > :first-child {
+  margin-top: 0;
+}
+
+.callout-content > :last-child {
+  margin-bottom: 0;
+}
+
+/* Obsidian 默认配色 */
+[data-callout="note"],
+[data-callout="info"],
+[data-callout="todo"] { --callout-color: 8, 109, 221; }
+
+[data-callout="abstract"],
+[data-callout="summary"],
+[data-callout="tldr"] { --callout-color: 0, 176, 255; }
+
+[data-callout="tip"],
+[data-callout="hint"],
+[data-callout="important"] { --callout-color: 0, 191, 188; }
+
+[data-callout="success"],
+[data-callout="check"],
+[data-callout="done"] { --callout-color: 8, 185, 78; }
+
+[data-callout="question"],
+[data-callout="help"],
+[data-callout="faq"] { --callout-color: 236, 117, 0; }
+
+[data-callout="warning"],
+[data-callout="caution"],
+[data-callout="attention"] { --callout-color: 236, 117, 0; }
+
+[data-callout="failure"],
+[data-callout="fail"],
+[data-callout="missing"],
+[data-callout="danger"],
+[data-callout="error"],
+[data-callout="bug"] { --callout-color: 233, 49, 71; }
+
+[data-callout="example"] { --callout-color: 120, 82, 238; }
+
+[data-callout="quote"],
+[data-callout="cite"] { --callout-color: 158, 158, 158; }
+
+/* 高亮：跟随主题强调色，暗色模式下也不刺眼 */
+mark {
+  background: rgba(255, 208, 0, 0.35);
+  color: inherit;
+  padding: 0 0.15em;
+  border-radius: 2px;
+}

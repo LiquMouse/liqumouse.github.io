@@ -78,7 +78,12 @@ markdown:
     case: 0                # 0 = 保留大小写，与现有 id 一致
     permalink: false
     collisionSuffix: ''
-  plugins: []
+  plugins:
+    - markdown-it-mark                  # ==高亮==
+    - markdown-it-footnote              # [^1] 脚注
+    - markdown-it-cjk-breaks            # 中日韩行尾自动断行
+    - markdown-it-obsidian-callouts     # > [!note] 标注块
+    - markdown-it-obsidian-imgsize      # ![](x|100x145)
 
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
