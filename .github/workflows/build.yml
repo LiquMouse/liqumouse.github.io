@@ -1,0 +1,70 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches: [notes]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: hexo-deploy
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. 取出纯笔记（本分支）
+      - name: Checkout notes
+        uses: actions/checkout@v4
+        with:
+          ref: notes
+
+      # 2. 取出站点工程（site 分支），放到子目录，避免和笔记混淆
+      - name: Checkout site
+        uses: actions/checkout@v4
+        with:
+          ref: site
+          path: site-src
+
+      # 3. 合并：笔记直接落进 source/，与 Hexo 的目录约定一致
+      - name: Merge notes into source
+        run: |
+          set -e
+          mkdir -p site-src/source
+          cp -r _posts site-src/source/
+          if [ -d image ]; then cp -r image site-src/source/; fi
+          echo "--- _posts ---"
+          ls site-src/source/_posts
+          echo "--- image ---"
+          ls site-src/source/image || true
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: site-src/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+        working-directory: site-src
+
+      # 固定时区，避免 date 在 UTC 下偏移
+      - name: Build
+        run: npx hexo generate
+        working-directory: site-src
+        env:
+          TZ: Asia/Shanghai
+
+      # 产物推到 master，GitHub Pages 从该分支发布
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: master
+          publish_dir: ./site-src/public
+          force_orphan: true
+          user_name: github-actions[bot]
+          user_email: github-actions[bot]@users.noreply.github.com
