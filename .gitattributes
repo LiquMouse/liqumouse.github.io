@@ -1,0 +1,2 @@
+# patch-package 生成的补丁必须在 Linux/Windows 上都是 LF，否则 CI 里打不上
+patches/*.patch text eol=lf

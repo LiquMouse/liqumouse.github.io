@@ -60,6 +60,26 @@ prismjs:
   line_number: true
   tab_replace: ''
 
+# Markdown 渲染
+## 渲染器：hexo-renderer-markdown-it（官方维护）
+## markdown-it 版本由 package.json 的 overrides 提升到 14.x（渲染器源码已适配 14）
+## 标题 id 由 hexo-util 的 slugize 生成，与旧的 marked 渲染器同源，锚点不会变
+markdown:
+  preset: 'default'
+  render:
+    html: true
+    xhtmlOut: false
+    breaks: false          # 对齐 marked 的默认行为：单个换行不产生 <br>
+    linkify: false
+    typographer: false     # 必须关闭，否则散文里的 -- != (c) 会被替换成 – ≠ ©
+  anchors:
+    level: 1               # 从 h1 起都生成 id（渲染器内部按 tag 序号做字符串比较）
+    separator: '-'
+    case: 0                # 0 = 保留大小写，与现有 id 一致
+    permalink: false
+    collisionSuffix: ''
+  plugins: []
+
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
 # per_page: Posts displayed per page. (0 = disable pagination)
