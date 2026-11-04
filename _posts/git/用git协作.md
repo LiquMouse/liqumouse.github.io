@@ -224,7 +224,7 @@ git merge origin/master
 
 启动 VSCode，在菜单中找到 `打开文件夹`，打开仓库目录。
 
-![](../image/用git协作/OpenFileFolder.png)
+![[OpenFileFolder.png]]
 
 VSCode 会自动识别目录下的 `.git` 信息。点击左侧的源代码管理图标（下图红框部分）进入 Git 面板。
 
