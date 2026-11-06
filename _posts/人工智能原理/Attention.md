@@ -7,3 +7,7 @@ tags:
 ## Transformer
 
 ==Q, K, V== 分别是什么、==Attention(Q, K, V)== 公式
+
+## GPT
+
+==GPT 1 ~ GPT 4==要考
