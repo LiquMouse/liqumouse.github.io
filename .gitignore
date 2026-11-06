@@ -3,6 +3,7 @@
 .obsidian/workspace-mobile.json
 .obsidian/cache
 .trash/
+Plugin data/
 
 # 插件本体从社区市场安装，不进仓库
 .obsidian/plugins/*
